@@ -42,19 +42,13 @@ const createProduct = async (productData) => {
 // Update a product
 const updateProduct = async (productId, productData) => {
   try {
-    // const product = await Product.findById(productId);
-    // if (!product) {
-    //   throw new Error("Product not found.");
-    // }
-    // product.set(productData);
     const updateDoc = {
-
       $set: {
         name: productData.name,
         description: productData.description,
         price: productData.price,
         quantity: productData.quantity,
-        imageUrl: productData.imageUrl
+        imageUrl: productData.imageUrl,
       },
     };
     const filter = { _id: productId };
