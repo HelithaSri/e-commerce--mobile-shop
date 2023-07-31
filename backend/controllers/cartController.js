@@ -20,7 +20,7 @@ const addToCart = async (req, res) => {
   const { productId, quantity } = req.body;
 
   try {
-    const addedItem = await cartService.addToCart("64c66d3c225c7d54fa7df812", quantity);
+    const addedItem = await cartService.addToCart(productId, quantity);
     const response = commonResponse(200, "Success", "Product Added to Cart", addedItem);
     res.json(response);
   } catch (error) {
