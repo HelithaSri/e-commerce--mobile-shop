@@ -1,14 +1,17 @@
 // backend/controllers/cartController.js
 
 const cartService = require('../service/cartService');
+const commonResponse = require("../utils/response");
 
 // Get cart items
 const getCartItems = async (req, res) => {
   try {
     const cartItems = await cartService.getCartItems();
-    res.json(cartItems);
+    const response = commonResponse(200, "Success", "All Cart Items", cartItems);
+    res.json(response);
   } catch (error) {
-    res.status(500).json({ error: error.message || 'Server error' });
+    const response = commonResponse(500, "Failed", "Server error");
+    res.status(500).json(response);
   }
 };
 
@@ -18,9 +21,11 @@ const addToCart = async (req, res) => {
 
   try {
     const addedItem = await cartService.addToCart("64c66d3c225c7d54fa7df812", quantity);
-    res.json(addedItem);
+    const response = commonResponse(200, "Success", "Product Added to Cart", addedItem);
+    res.json(response);
   } catch (error) {
-    res.status(500).json({ error: error.message || 'Server error' });
+    const response = commonResponse(500, "Failed", "Server error");
+    res.status(500).json(response);
   }
 };
 
@@ -30,9 +35,11 @@ const removeFromCart = async (req, res) => {
 
   try {
     await cartService.removeFromCart(productId);
-    res.json({ message: 'Item removed from the cart' });
+    const response = commonResponse(200, "Success", "Item removed from the cart");
+    res.json(response);
   } catch (error) {
-    res.status(500).json({ error: error.message || 'Server error' });
+    const response = commonResponse(500, "Failed", "Server error");
+    res.status(500).json(response);
   }
 };
 
